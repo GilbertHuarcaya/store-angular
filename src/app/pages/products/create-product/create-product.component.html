@@ -1,0 +1,74 @@
+<div class="container">
+  <form class="form" #checkoutForm="ngForm">
+    <mat-form-field class="form__element">
+      <input
+        matInput
+        placeholder="Name"
+        required
+        [(ngModel)]="model.name"
+        name="name"
+        #name="ngModel"
+      />
+      <mat-error *ngIf="!name.valid || name.pristine">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+    <ng-container>
+      <mat-form-field class="form__element">
+        <input
+          matInput
+          required
+          placeholder="Price"
+          [(ngModel)]="model.price"
+          name="price"
+          #price="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field class="form__element">
+        <input
+          matInput
+          required
+          placeholder="Description"
+          [(ngModel)]="model.description"
+          name="description"
+          #description="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field class="form__element">
+        <input
+          matInput
+          required
+          placeholder="Stock"
+          [(ngModel)]="model.stock"
+          name="stock"
+          #stock="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field class="form__element">
+        <mat-label>Select me</mat-label>
+        <mat-select
+          name="category"
+          required
+          #category="ngModel"
+          [(ngModel)]="model.category"
+        >
+          <mat-option [value]="categoria.categoryId" *ngFor="let categoria of categories">
+            {{ categoria.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+  </form>
+</div>
+<div class="actions">
+  <button
+    (click)="onSubmit(checkoutForm)"
+    [disabled]="!checkoutForm.form.valid"
+    class="actions__btn"
+    color="primary"
+    mat-raised-button
+    type="submit"
+  >
+    Checkout
+  </button>
+</div>
