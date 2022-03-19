@@ -37,7 +37,7 @@ export class ShoppingCartService {
   }
 
   private addToCart(product: Product): void {
-    const isProductInCart = this.products.find(({ id }) => id === product.id)
+    const isProductInCart = this.products.find(({ productId }) => productId === product.productId)
 
     if (isProductInCart) {
       isProductInCart.qty += 1;

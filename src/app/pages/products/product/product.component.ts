@@ -9,11 +9,27 @@ import { Product } from '../interfaces/product.interface';
 })
 export class ProductComponent {
   @Input() product!: Product;
-  @Output() addToCartClick = new EventEmitter<Product>();
+  @Output() addToCartClick = new
+  EventEmitter<Product>();
+  @Output() deleteAProduct = new
+  EventEmitter<Product>();
+  isEdit = false
 
+  onEdit(): void {
+    console.log(this.product)
+    this.isEdit = !this.isEdit;
+  }
 
   onClick(): void {
     this.addToCartClick.emit(this.product);
+  }
+
+  onClickEdit(): void {
+    this.onEdit()
+  }
+
+  onClickDelete(): void{
+    this.deleteAProduct.emit(this.product)
   }
 
 }

@@ -1,0 +1,87 @@
+<section class="products">
+  <mat-radio-group class="form__element">
+    <p>Choose an option:</p>
+    <mat-radio-button
+      value="delivery"
+      (change)="onPickupOrDelivery(true)"
+      checked
+    >
+      Table
+    </mat-radio-button>
+    /
+    <mat-radio-button value="pickup" (change)="onPickupOrDelivery(false)"
+      >Edit</mat-radio-button
+    >
+  </mat-radio-group>
+  <ng-container *ngIf="isDelivery; else showStores">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ex. Mia"
+        #input
+      />
+    </mat-form-field>
+
+    <div>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        (matSortChange)="sortData($event)"
+        matSortActive="created"
+        matSortDisableClear
+      >
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Created
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.createdAt | date: "dd-MMM-yyy" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>name</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>price</th>
+          <td mat-cell *matCellDef="let row">{{ row.price | currency }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="stock">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>stock</th>
+          <td mat-cell *matCellDef="let row">{{ row.stock }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>status</th>
+          <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">
+            No data matching the filter "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
+  <ng-template #showStores>
+    <div class="products__collage">
+      <app-product
+        (addToCartClick)="addToCart($event)"
+        (deleteAProduct)="deleteProduct($event)"
+        [product]="product"
+        *ngFor="let product of products"
+      ></app-product>
+    </div>
+  </ng-template>
+</section>

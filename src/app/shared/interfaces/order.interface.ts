@@ -1,5 +1,5 @@
 export interface Details {
-  productId: number;
+  productId: string;
   productName: string;
   quantity: number;
 }
@@ -8,12 +8,13 @@ export interface Order {
   name: string;
   shippingAddress: string;
   city: string;
-  date: string;
+  date: Date;
   isDelivery: boolean;
-  id: number;
+  orderId: string;
+  id: string;
 }
 
 export interface DetailsOrder {
   details: Details[];
-  orderId: number;
+  orderId: string;
 }

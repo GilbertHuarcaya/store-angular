@@ -13,6 +13,17 @@
 
 .mat-card-actions {
   margin: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.delete__btn {
+  max-width: 20px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .mat-card > .mat-card-actions:last-child {

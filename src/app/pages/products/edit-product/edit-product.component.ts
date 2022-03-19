@@ -1,5 +1,6 @@
+import { ProductComponent } from './../product/product.component';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { DataService } from 'src/app/shared/services/data.service';
 import { Product } from 'src/app/pages/products/interfaces/product.interface';
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class EditProductComponent implements OnInit {
   @Input() product!: Product;
+  @Output() editAProduct = new
+  EventEmitter<Product>();
 
   categories: Category[] = []
 
@@ -28,14 +31,20 @@ export class EditProductComponent implements OnInit {
       ...formData,
       status: 'Disponible',
       categoryId: formData.category,
+      productId: this.product.productId
     };
     this.dataSvc
-      .saveProduct(data)
+      .updateProduct(data)
       .pipe(
         tap((res) => console.log('Product ->', res)),
-        tap(() => this.router.navigate(['/products']))
+        tap(() => this.router.navigate(['/products'])),
+        tap(()=> this.onClickSaveChanges())
       )
       .subscribe();
+  }
+
+  onClickSaveChanges(): void{
+    this.editAProduct.emit()
   }
 
   private getCategories(): void {
@@ -44,5 +53,4 @@ export class EditProductComponent implements OnInit {
         tap((categories: Category[]) => this.categories = categories))
       .subscribe()
   }
-
 }

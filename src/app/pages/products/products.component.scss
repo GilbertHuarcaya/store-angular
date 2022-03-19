@@ -1,9 +1,32 @@
-
 .products {
   align-items: center;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 6rem;
+  width: 100%;
 }
 
+.products__collage {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.demo-table {
+  width: 90%;
+}
+
+table {
+  max-width: 100vw;
+  width: 60rem;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 60%;
+}

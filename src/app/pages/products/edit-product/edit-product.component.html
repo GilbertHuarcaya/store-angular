@@ -5,7 +5,7 @@
         matInput
         placeholder="Name"
         required
-        [(ngModel)]="model.name"
+        [(ngModel)]="product.name"
         name="name"
         #name="ngModel"
       />
@@ -19,7 +19,7 @@
           matInput
           required
           placeholder="Price"
-          [(ngModel)]="model.price"
+          [(ngModel)]="product.price"
           name="price"
           #price="ngModel"
         />
@@ -29,7 +29,7 @@
           matInput
           required
           placeholder="Description"
-          [(ngModel)]="model.description"
+          [(ngModel)]="product.description"
           name="description"
           #description="ngModel"
         />
@@ -39,7 +39,7 @@
           matInput
           required
           placeholder="Stock"
-          [(ngModel)]="model.stock"
+          [(ngModel)]="product.stock"
           name="stock"
           #stock="ngModel"
         />
@@ -50,7 +50,7 @@
           name="category"
           required
           #category="ngModel"
-          [(ngModel)]="model.category"
+          [(ngModel)]="product.categoryId"
         >
           <mat-option
             [value]="categoria.categoryId"
@@ -72,6 +72,6 @@
     mat-raised-button
     type="submit"
   >
-    Create Product
+    Save Changes
   </button>
 </div>

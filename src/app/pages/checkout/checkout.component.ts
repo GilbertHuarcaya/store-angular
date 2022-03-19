@@ -16,7 +16,7 @@ import { ProductsService } from '../products/services/products.service';
 })
 export class CheckoutComponent implements OnInit {
   model = {
-    name: 'Dominicode',
+    name: 'UserName',
     store: '',
     shippingAddress: '',
     city: ''
@@ -115,4 +115,3 @@ export class CheckoutComponent implements OnInit {
       .subscribe()
   }
 }
-
