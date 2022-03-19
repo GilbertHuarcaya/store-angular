@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../interfaces/product.interface';
 
@@ -13,19 +14,23 @@ export class ProductComponent {
   EventEmitter<Product>();
   @Output() deleteAProduct = new
   EventEmitter<Product>();
+  @Output() updateAllProducts = new
+  EventEmitter<Product>();
   isEdit = false
 
-  onEdit(): void {
-    console.log(this.product)
-    this.isEdit = !this.isEdit;
+  onEdit(product: Product): void {
+    this.product = product
+    console.log(product)
+    this.updateAllProducts.emit()
   }
 
   onClick(): void {
-    this.addToCartClick.emit(this.product);
+    this.product = {...this.product, stock: this.product.stock -= 1};
+    this.addToCartClick.emit(this.product)
   }
 
   onClickEdit(): void {
-    this.onEdit()
+    this.isEdit = !this.isEdit;
   }
 
   onClickDelete(): void{

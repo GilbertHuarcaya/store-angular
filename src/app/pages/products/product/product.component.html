@@ -30,6 +30,6 @@
   <app-edit-product
     *ngIf="isEdit; else null"
     [product]="product"
-    (editAProduct)="onEdit()"
+    (editAProduct)="onEdit($event)"
   ></app-edit-product>
 </mat-card>

@@ -15,7 +15,16 @@ export class ProductsService {
   }
 
   updateStock(productId: string, stock: number): Observable<any> {
-    const body = { "stock": stock };
+    let body = { stock: stock, status: 'Disponible' };
+    if (stock === 0 ){
+      body = {stock: stock, status: 'Out of Stock'}
+    }
+    else if(stock < 0){
+      body = {
+        stock: 0,
+        status: 'Out of Stock'
+      }
+    }
     return this.http.patch<any>(`${this.apiURl}/${productId}`, body);
   }
 

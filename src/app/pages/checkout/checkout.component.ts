@@ -53,7 +53,7 @@ export class CheckoutComponent implements OnInit {
     this.dataSvc.saveOrder(data)
       .pipe(
         tap(res => console.log('Order ->', res)),
-        switchMap(({ id: orderId }) => {
+        switchMap(({ orderId: orderId }) => {
           const details = this.prepareDetails();
           return this.dataSvc.saveDetailsOrder({ details, orderId });
         }),
@@ -78,7 +78,7 @@ export class CheckoutComponent implements OnInit {
   private prepareDetails(): Details[] {
     const details: Details[] = [];
     this.cart.forEach((product: Product) => {
-      const { id: productId, name: productName, qty: quantity, stock } = product;
+      const { productId: productId, name: productName, qty: quantity, stock } = product;
       const updateStock = (stock - quantity);
 
       this.productsSvc.updateStock(productId, updateStock)

@@ -79,6 +79,7 @@
       <app-product
         (addToCartClick)="addToCart($event)"
         (deleteAProduct)="deleteProduct($event)"
+        (updateAllProducts)="ngOnInit()"
         [product]="product"
         *ngFor="let product of products"
       ></app-product>

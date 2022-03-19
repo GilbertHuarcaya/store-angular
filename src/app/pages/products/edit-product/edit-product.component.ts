@@ -19,6 +19,8 @@ export class EditProductComponent implements OnInit {
 
   categories: Category[] = []
 
+  category!: Category
+
   constructor(private dataSvc: DataService, private router: Router) {}
 
   ngOnInit(): void {
@@ -29,22 +31,23 @@ export class EditProductComponent implements OnInit {
     console.log('Guardar', formData);
     const data: Product = {
       ...formData,
-      status: 'Disponible',
+      status: formData.stock <= 0? 'Out of Stock' : 'Disponible',
       categoryId: formData.category,
-      productId: this.product.productId
+      productId: this.product.productId,
+      stock: formData.stock < 0? 0: formData.stock,
     };
     this.dataSvc
       .updateProduct(data)
       .pipe(
         tap((res) => console.log('Product ->', res)),
         tap(() => this.router.navigate(['/products'])),
-        tap(()=> this.onClickSaveChanges())
+        tap((res)=> this.onClickSaveChanges(res))
       )
       .subscribe();
   }
 
-  onClickSaveChanges(): void{
-    this.editAProduct.emit()
+  onClickSaveChanges(product: Product): void{
+    this.editAProduct.emit(product)
   }
 
   private getCategories(): void {
